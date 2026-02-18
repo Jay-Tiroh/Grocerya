@@ -1,27 +1,43 @@
+import {
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  useFonts,
+} from "@expo-google-fonts/poppins";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
-// 1. Keep the splash screen visible immediately
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [loaded, error] = useFonts({
+    "Poppins-Regular": Poppins_400Regular,
+    "Poppins-Medium": Poppins_500Medium,
+    "Poppins-SemiBold": Poppins_600SemiBold,
+    "Poppins-Bold": Poppins_700Bold,
+  });
+
   useEffect(() => {
-    // 2. Define the hide function
-    const prepare = async () => {
-      try {
-        // 3. Wait for 3 seconds (3000ms)
-        await new Promise((resolve) => setTimeout(resolve, 500));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        // 4. HIDE the splash screen
-        await SplashScreen.hideAsync();
-      }
-    };
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
 
-    prepare();
-  }, []);
+  if (!loaded && !error) {
+    return null;
+  }
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: "#fff" },
+        headerTintColor: "#333",
+      }}
+    >
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+    </Stack>
+  );
 }

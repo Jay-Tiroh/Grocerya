@@ -1,12 +1,19 @@
+import { useRouter } from "expo-router";
 import React from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 
 type ButtonProps = {
   text: string;
   type?: "primary" | "secondary";
-  customStyles?: {};
-  customTextStyles?: {};
-  action?: () => void;
+  customStyles?: ViewStyle;
+  customTextStyles?: TextStyle;
+  action?: string | (() => void);
 };
 
 const Button = ({
@@ -16,14 +23,25 @@ const Button = ({
   customTextStyles,
   action,
 }: ButtonProps) => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    if (typeof action === "function") {
+      action();
+    } else if (typeof action === "string") {
+      router.push(action as any);
+    }
+  };
+
   return (
     <Pressable
-      style={[
+      style={({ pressed }) => [
         styles.button,
         type === "primary" ? styles.buttonPri : styles.buttonSec,
         customStyles,
+        pressed && { opacity: 0.7 },
       ]}
-      onPress={action}
+      onPress={handlePress}
     >
       <Text
         style={[
@@ -43,10 +61,11 @@ export default Button;
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    height: 50,
+    height: 52,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 100,
+    paddingVertical: 14,
   },
   buttonPri: {
     backgroundColor: "#0d0d0d",
@@ -56,7 +75,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: "500",
+    fontFamily: "Poppins-Medium",
   },
   buttonTextPri: {
     color: "#fff",
