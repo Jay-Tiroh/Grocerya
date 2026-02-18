@@ -121,7 +121,7 @@ const Onboarding = () => {
       {/* Bottom Buttons */}
       <View style={styles.buttonContainer}>
         {isLast ? (
-          <Button text="Get Started" />
+          <Button text="Get Started" action="register" />
         ) : (
           <>
             <Button text="Skip" type="secondary" action={handleSkip} />
