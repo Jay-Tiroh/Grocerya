@@ -18,19 +18,20 @@ const screens = [
     },
   },
   {
-    name: "location",
-    options: {
-      goBack: true,
-      infoBtn: true,
-    },
-  },
-  {
     name: "verify",
     options: {
       goBack: true,
       infoBtn: true,
     },
   },
+  {
+    name: "location",
+    options: {
+      goBack: true,
+      infoBtn: true,
+    },
+  },
+
   {
     name: "notifications",
     options: {
