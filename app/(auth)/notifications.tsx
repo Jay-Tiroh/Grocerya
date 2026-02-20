@@ -24,13 +24,13 @@ const notification = () => {
       <View style={styles.buttonContainer}>
         <Button
           text="Enable Notifications"
-          action="index"
+          action="/"
           customStyles={{ flex: 0, width: "100%" }}
         />
         <Button
           text="Skip For Now"
           type="secondary"
-          action="index"
+          action="/"
           customStyles={{ flex: 0, width: "100%" }}
         />
       </View>
