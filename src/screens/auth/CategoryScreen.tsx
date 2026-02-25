@@ -1,6 +1,7 @@
-import Button from "@/components/general/Button";
-import Spacer from "@/components/general/Spacer";
-import ThemedText from "@/components/general/ThemedText";
+import Button from "@components/general/Button";
+import Spacer from "@components/general/Spacer";
+import ThemedText from "@components/general/ThemedText";
+import { useAuthNavigation } from "@navigation/useAuthNavigation";
 import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -42,6 +43,7 @@ const extraCategories = [
 ];
 
 const Category = () => {
+  const { toLocation } = useAuthNavigation();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [visibleExtraCount, setVisibleExtraCount] = useState(0);
 
@@ -126,7 +128,7 @@ const Category = () => {
 
       {/* Fixed Bottom Button */}
       <View style={styles.buttonContainer}>
-        <Button text="Continue" action="location" />
+        <Button text="Continue" action={toLocation} />
       </View>
     </SafeAreaView>
   );

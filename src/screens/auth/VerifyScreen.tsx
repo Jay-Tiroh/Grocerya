@@ -1,13 +1,15 @@
-import OTPInput from "@/components/auth/OTPInput";
-import Button from "@/components/general/Button";
-import Spacer from "@/components/general/Spacer";
-import ThemedAvoidingView from "@/components/general/ThemedAvoidingView";
-import ThemedText from "@/components/general/ThemedText";
+import OTPInput from "@components/auth/OTPInput";
+import Button from "@components/general/Button";
+import Spacer from "@components/general/Spacer";
+import ThemedAvoidingView from "@components/general/ThemedAvoidingView";
+import ThemedText from "@components/general/ThemedText";
+import { useAuthNavigation } from "@navigation/useAuthNavigation";
 import React, { useEffect, useState } from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const verify = () => {
+const Verify = () => {
+  const { toCategory } = useAuthNavigation();
   const [flexToggle, setFlexToggle] = useState(false);
   useEffect(() => {
     const keyboardShowListener = Keyboard.addListener("keyboardDidShow", () => {
@@ -46,7 +48,7 @@ const verify = () => {
           <OTPInput />
         </View>
         <View style={styles.buttonContainer}>
-          <Button text="Continue" action="category" />
+          <Button text="Continue" action={toCategory} />
         </View>
         <Spacer size={8} />
         <ThemedText
@@ -64,7 +66,7 @@ const verify = () => {
   );
 };
 
-export default verify;
+export default Verify;
 
 const styles = StyleSheet.create({
   container: {

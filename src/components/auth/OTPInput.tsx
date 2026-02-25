@@ -1,10 +1,10 @@
-import { colors } from "@/constants/style";
+import ThemedTextInput from "@components/general/ThemedTextInput";
+import { colors } from "@constants/style";
 import React, { useRef, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-import ThemedTextInput from "../general/ThemedTextInput";
 const OTPInput = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
-  // Create an array of refs to control focus
+
   const inputs = useRef<Array<TextInput | null>>([]);
 
   const handleChange = (text: string, index: number) => {
@@ -29,7 +29,6 @@ const OTPInput = () => {
   };
 
   const handleKeyPress = (e: any, index: number) => {
-    // Logic for backspace: move to previous input if current is empty
     if (e.nativeEvent.key === "Backspace" && otp[index] === "" && index > 0) {
       inputs.current[index - 1]?.focus();
     }
@@ -49,7 +48,7 @@ const OTPInput = () => {
               inputs.current[index - 1]?.focus();
             }
           }}
-          keyboardType="number-pad" // Better for OTP as it shows only numbers
+          keyboardType="number-pad"
           maxLength={index === 0 ? 5 : 1} // Allow 5 on first box to catch paste
           textContentType="oneTimeCode"
           customStyles={styles.greyBox}

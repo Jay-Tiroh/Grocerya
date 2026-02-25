@@ -1,4 +1,8 @@
-import OnboardingItem from "@/components/OnboardingItem";
+import Box from "@assets/images/box.svg";
+import CashRegister from "@assets/images/cash-register.svg";
+import Trolley from "@assets/images/trolley.svg";
+import Truck from "@assets/images/truck.svg";
+import OnboardingItem from "@components/OnboardingItem";
 import React, { useRef, useState } from "react";
 import {
   Dimensions,
@@ -9,13 +13,9 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Box from "../assets/images/box.svg";
-import CashRegister from "../assets/images/cash-register.svg";
-import Trolley from "../assets/images/trolley.svg";
-import Truck from "../assets/images/truck.svg";
 
-import Button from "@/components/general/Button";
-import {} from "react-native";
+import Button from "@components/general/Button";
+import { useAppNavigation } from "@navigation/useAppNavigation";
 
 const { width } = Dimensions.get("window");
 
@@ -54,6 +54,7 @@ const Onboarding = () => {
   const [isLast, setIsLast] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const scrollRef = useRef<ScrollView>(null);
+  const navigation = useAppNavigation();
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offset = event.nativeEvent.contentOffset.x;
@@ -121,7 +122,10 @@ const Onboarding = () => {
       {/* Bottom Buttons */}
       <View style={styles.buttonContainer}>
         {isLast ? (
-          <Button text="Get Started" action="register" />
+          <Button
+            text="Get Started"
+            action={() => navigation.replace("Auth")}
+          />
         ) : (
           <>
             <Button text="Skip" type="secondary" action={handleSkip} />

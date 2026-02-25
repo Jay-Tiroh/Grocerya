@@ -1,11 +1,15 @@
-import Button from "@/components/general/Button";
-import Spacer from "@/components/general/Spacer";
-import ThemedText from "@/components/general/ThemedText";
+import Map from "@assets/images/map.svg";
+import Button from "@components/general/Button";
+import Spacer from "@components/general/Spacer";
+import ThemedText from "@components/general/ThemedText";
+import { useAuthNavigation } from "@navigation/useAuthNavigation";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Map from "../../assets/images/map.svg";
-const location = () => {
+
+const Location = () => {
+  const { toNotification } = useAuthNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={[{ flex: 1, justifyContent: "center" }, styles.container]}>
@@ -28,13 +32,13 @@ const location = () => {
       <View style={styles.buttonContainer}>
         <Button
           text="Continue"
-          action="notifications"
+          action={toNotification}
           customStyles={{ flex: 0, width: "100%" }}
         />
         <Button
           text="Set Manually"
           type="secondary"
-          action="notifications"
+          action={toNotification}
           customStyles={{ flex: 0, width: "100%" }}
         />
       </View>
@@ -42,7 +46,7 @@ const location = () => {
   );
 };
 
-export default location;
+export default Location;
 
 const styles = StyleSheet.create({
   container: {

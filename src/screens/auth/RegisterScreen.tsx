@@ -1,13 +1,15 @@
-import PhoneInput from "@/components/auth/PhoneInput";
-import Button from "@/components/general/Button";
-import Spacer from "@/components/general/Spacer";
-import ThemedAvoidingView from "@/components/general/ThemedAvoidingView";
-import ThemedText from "@/components/general/ThemedText";
+import PhoneInput from "@components/auth/PhoneInput";
+import Button from "@components/general/Button";
+import Spacer from "@components/general/Spacer";
+import ThemedAvoidingView from "@components/general/ThemedAvoidingView";
+import ThemedText from "@components/general/ThemedText";
+import { useAuthNavigation } from "@navigation/useAuthNavigation";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const register = () => {
+const Register = () => {
+  const { toVerify } = useAuthNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <ThemedAvoidingView>
@@ -32,14 +34,14 @@ const register = () => {
           <PhoneInput />
         </View>
         <View style={styles.buttonContainer}>
-          <Button text="Continue" action="verify" />
+          <Button text="Continue" action={toVerify} />
         </View>
       </ThemedAvoidingView>
     </SafeAreaView>
   );
 };
 
-export default register;
+export default Register;
 
 const styles = StyleSheet.create({
   container: {

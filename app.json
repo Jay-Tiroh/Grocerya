@@ -7,17 +7,15 @@
     "icon": "./assets/images/icon.png",
     "scheme": "grocerya",
     "userInterfaceStyle": "automatic",
-
-    // 1. CONFIG FOR EXPO GO (Standard)
     "splash": {
       "image": "./assets/images/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#0d0d0d"
     },
-
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.Grocerya"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,7 +25,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.Grocerya"
     },
     "web": {
       "output": "static",
@@ -42,7 +41,6 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#0d0d0d"
-          // Removed "dark" object unless you explicitly have a different dark mode logo
         }
       ]
     ],

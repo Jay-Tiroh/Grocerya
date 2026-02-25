@@ -1,12 +1,12 @@
-import { colors } from "@/constants/style";
+import ThemedText from "@components/general/ThemedText";
+import ThemedTextInput from "@components/general/ThemedTextInput";
+import { colors } from "@constants/style";
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import CountryPicker, {
   Country,
   CountryCode,
 } from "react-native-country-picker-modal";
-import ThemedText from "../general/ThemedText";
-import ThemedTextInput from "../general/ThemedTextInput";
 
 const PhoneInput = () => {
   const [countryCode, setCountryCode] = useState<CountryCode>("ID");
