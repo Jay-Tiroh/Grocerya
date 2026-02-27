@@ -12,9 +12,9 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import Button from "@components/general/Button";
+import SafeAvoidingView from "@components/general/SafeAvoidingView";
 import { useAppNavigation } from "@navigation/useAppNavigation";
 
 const { width } = Dimensions.get("window");
@@ -84,7 +84,7 @@ const Onboarding = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAvoidingView safeAreaStyle={styles.container}>
       {/* Indicators */}
       <View style={styles.indicatorWrapper}>
         {OnboardingItems.map((_, index) => (
@@ -133,7 +133,7 @@ const Onboarding = () => {
           </>
         )}
       </View>
-    </SafeAreaView>
+    </SafeAvoidingView>
   );
 };
 

@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 // svg images
 import BackSvg from "@assets/images/back.svg";
 import HelpSvg from "@assets/images/help.svg";
 import { useAppNavigation } from "@navigation/useAppNavigation";
+import SafeAvoidingView from "./SafeAvoidingView";
 
 type CustomHeaderProps = {
   title?: string;
@@ -15,7 +15,7 @@ type CustomHeaderProps = {
 const CustomHeader = ({ title, infoBtn, goBack }: CustomHeaderProps) => {
   const navigator = useAppNavigation();
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAvoidingView safeAreaStyle={styles.container}>
       {/* back btn */}
       {goBack && (
         <TouchableOpacity
@@ -38,7 +38,7 @@ const CustomHeader = ({ title, infoBtn, goBack }: CustomHeaderProps) => {
           <HelpSvg style={styles.svg} />
         </Pressable>
       )}
-    </SafeAreaView>
+    </SafeAvoidingView>
   );
 };
 

@@ -1,12 +1,11 @@
 import OTPInput from "@components/auth/OTPInput";
 import Button from "@components/general/Button";
+import SafeAvoidingView from "@components/general/SafeAvoidingView";
 import Spacer from "@components/general/Spacer";
-import ThemedAvoidingView from "@components/general/ThemedAvoidingView";
 import ThemedText from "@components/general/ThemedText";
 import { useAuthNavigation } from "@navigation/useAuthNavigation";
 import React, { useEffect, useState } from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const Verify = () => {
   const { toCategory } = useAuthNavigation();
@@ -26,43 +25,41 @@ const Verify = () => {
     };
   }, []);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <ThemedAvoidingView>
-        <Spacer size={40} />
-        <View>
-          <ThemedText type="title" weight="semiBold" color="primary">
-            Enter your OTP number
-          </ThemedText>
-          <ThemedText customStyles={{ marginTop: 8 }}>
-            We’ve sent the OTP number via sms to
-          </ThemedText>
-          <ThemedText
-            color="primary"
-            weight="semiBold"
-            customStyles={{ fontSize: 14 }}
-          >
-            +62 888 1234 5678
-          </ThemedText>
-        </View>
-        <View style={{ flex: 1 }}>
-          <OTPInput />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button text="Continue" action={toCategory} />
-        </View>
-        <Spacer size={8} />
-        <ThemedText
-          type="tiny"
-          color="secondary"
-          customStyles={{ textAlign: "center" }}
-        >
-          By clicking, I accept the{" "}
-          <ThemedText weight="semiBold" color="primary" type="tiny">
-            Terms and Conditions & Privacy Policy
-          </ThemedText>
+    <SafeAvoidingView isAvoiding>
+      <Spacer size={40} />
+      <View>
+        <ThemedText type="title" weight="semiBold" color="primary">
+          Enter your OTP number
         </ThemedText>
-      </ThemedAvoidingView>
-    </SafeAreaView>
+        <ThemedText customStyles={{ marginTop: 8 }}>
+          We’ve sent the OTP number via sms to
+        </ThemedText>
+        <ThemedText
+          color="primary"
+          weight="semiBold"
+          customStyles={{ fontSize: 14 }}
+        >
+          +62 888 1234 5678
+        </ThemedText>
+      </View>
+      <View style={{ flex: 1 }}>
+        <OTPInput />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button text="Continue" action={toCategory} />
+      </View>
+      <Spacer size={8} />
+      <ThemedText
+        type="tiny"
+        color="secondary"
+        customStyles={{ textAlign: "center" }}
+      >
+        By clicking, I accept the{" "}
+        <ThemedText weight="semiBold" color="primary" type="tiny">
+          Terms and Conditions & Privacy Policy
+        </ThemedText>
+      </ThemedText>
+    </SafeAvoidingView>
   );
 };
 

@@ -1,59 +1,52 @@
-import ThemedTextInput from "@components/general/ThemedTextInput";
+import ThemedText from "@components/general/ThemedText";
 import { colors } from "@constants/style";
-import React, { useRef, useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import { Platform, StyleSheet, TextInputProps, View } from "react-native";
+
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell,
+} from "react-native-confirmation-code-field";
+
+const CELL_COUNT = 5;
+const autoComplete = Platform.select<TextInputProps["autoComplete"]>({
+  android: "sms-otp",
+  default: "one-time-code",
+});
 const OTPInput = () => {
-  const [otp, setOtp] = useState(["", "", "", "", ""]);
+  const [value, setValue] = useState("");
+  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value,
+    setValue,
+  });
 
-  const inputs = useRef<Array<TextInput | null>>([]);
-
-  const handleChange = (text: string, index: number) => {
-    // Logic for Paste
-    if (text.length > 1) {
-      const digits = text
-        .split("")
-        .filter((d) => /\d/.test(d))
-        .slice(0, 5);
-      const newOtp = [...otp];
-      digits.forEach((d, i) => (newOtp[i] = d));
-      setOtp(newOtp);
-      inputs.current[Math.min(digits.length, 4)]?.focus();
-      return;
-    }
-
-    // Logic for manual typing
-    const newOtp = [...otp];
-    newOtp[index] = text;
-    setOtp(newOtp);
-    if (text && index < 4) inputs.current[index + 1]?.focus();
-  };
-
-  const handleKeyPress = (e: any, index: number) => {
-    if (e.nativeEvent.key === "Backspace" && otp[index] === "" && index > 0) {
-      inputs.current[index - 1]?.focus();
-    }
-  };
   return (
     <View style={styles.container}>
-      {otp.map((value, index) => (
-        <ThemedTextInput
-          key={index}
-          ref={(ref) => {
-            inputs.current[index] = ref;
-          }}
-          value={value}
-          onChangeText={(text) => handleChange(text, index)}
-          onKeyPress={({ nativeEvent }) => {
-            if (nativeEvent.key === "Backspace" && !otp[index] && index > 0) {
-              inputs.current[index - 1]?.focus();
-            }
-          }}
-          keyboardType="number-pad"
-          maxLength={index === 0 ? 5 : 1} // Allow 5 on first box to catch paste
-          textContentType="oneTimeCode"
-          customStyles={styles.greyBox}
-        />
-      ))}
+      <CodeField
+        ref={ref}
+        {...props}
+        // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
+        value={value}
+        onChangeText={setValue}
+        cellCount={CELL_COUNT}
+        rootStyle={OTPStyles.codeFieldRoot}
+        keyboardType="number-pad"
+        textContentType="oneTimeCode"
+        autoComplete={autoComplete}
+        testID="my-code-input"
+        renderCell={({ index, symbol, isFocused }) => (
+          <ThemedText
+            key={index}
+            customStyles={OTPStyles.cell}
+            onLayout={getCellOnLayoutHandler(index)}
+          >
+            {symbol || (isFocused && <Cursor />)}
+          </ThemedText>
+        )}
+      />
     </View>
   );
 };
@@ -65,19 +58,33 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
     flex: 1,
-    // paddingRight: 10,
     justifyContent: "center",
   },
+});
 
-  greyBox: {
-    backgroundColor: colors.accent,
+const OTPStyles = StyleSheet.create({
+  root: { flex: 1, padding: 20 },
+  title: { textAlign: "center", fontSize: 30 },
+  codeFieldRoot: {
+    marginTop: 20,
+    justifyContent: "center",
+    gap: 10,
+    width: "100%",
+    height: 58,
+  },
+  cell: {
+    width: 70,
     height: 52,
-    flex: 1,
-    borderRadius: 8,
+    lineHeight: 52,
+    fontSize: 18,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    paddingHorizontal: 10,
+    backgroundColor: colors.accent,
+    borderRadius: 8,
+  },
+  focusCell: {
+    borderColor: "#000",
   },
 });

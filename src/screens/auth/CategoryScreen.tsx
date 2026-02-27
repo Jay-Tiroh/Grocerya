@@ -1,46 +1,11 @@
 import Button from "@components/general/Button";
+import SafeAvoidingView from "@components/general/SafeAvoidingView";
 import Spacer from "@components/general/Spacer";
 import ThemedText from "@components/general/ThemedText";
+import { baseCategories, extraCategories } from "@constants/categories";
 import { useAuthNavigation } from "@navigation/useAuthNavigation";
 import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-const baseCategories = [
-  "Gluten-Free",
-  "Vegan Friendly",
-  "Raw Meat",
-  "Organic",
-  "Dairy-Free",
-  "Sugar-Free",
-  "Cruelty-Free",
-  "Processed Food",
-];
-
-const extraCategories = [
-  "Seafood",
-  "Bakery",
-  "Beverages",
-  "Snacks",
-  "Frozen Food",
-  "Grains",
-  "Canned Goods",
-  "Spices",
-  "Fruits",
-  "Vegetables",
-  "Herbs",
-  "Nuts",
-  "Breakfast",
-  "Baby Food",
-  "Pet Food",
-  "Supplements",
-  "Meat Alternatives",
-  "Pasta",
-  "Rice",
-  "Sauces",
-  "Condiments",
-  "Health Drinks",
-];
 
 const Category = () => {
   const { toLocation } = useAuthNavigation();
@@ -63,7 +28,7 @@ const Category = () => {
   const remainingCount = extraCategories.length - visibleExtraCount;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAvoidingView>
       {/* Main Content Area */}
       <View style={{ flex: 1 }}>
         <Spacer size={40} />
@@ -130,18 +95,13 @@ const Category = () => {
       <View style={styles.buttonContainer}>
         <Button text="Continue" action={toLocation} />
       </View>
-    </SafeAreaView>
+    </SafeAvoidingView>
   );
 };
 
 export default Category;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 20,
-  },
   categoryWrapper: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -166,6 +126,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     height: 54,
-    marginBottom: 30,
+    marginBottom: 10,
   },
 });

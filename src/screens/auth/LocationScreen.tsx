@@ -1,17 +1,17 @@
 import Map from "@assets/images/map.svg";
 import Button from "@components/general/Button";
+import SafeAvoidingView from "@components/general/SafeAvoidingView";
 import Spacer from "@components/general/Spacer";
 import ThemedText from "@components/general/ThemedText";
 import { useAuthNavigation } from "@navigation/useAuthNavigation";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const Location = () => {
   const { toNotification } = useAuthNavigation();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAvoidingView safeAreaStyle={{ alignItems: "center" }}>
       <View style={[{ flex: 1, justifyContent: "center" }, styles.container]}>
         <Map />
         <Spacer size={40} />
@@ -42,7 +42,7 @@ const Location = () => {
           customStyles={{ flex: 0, width: "100%" }}
         />
       </View>
-    </SafeAreaView>
+    </SafeAvoidingView>
   );
 };
 
