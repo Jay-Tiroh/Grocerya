@@ -5,13 +5,14 @@ import {
   Poppins_700Bold,
   useFonts,
 } from "@expo-google-fonts/poppins";
-import { Stack } from "expo-router";
+
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import RootNavigator from "./src/navigation/RootNavigator";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+export default function App() {
   const [loaded, error] = useFonts({
     "Poppins-Regular": Poppins_400Regular,
     "Poppins-Medium": Poppins_500Medium,
@@ -25,19 +26,7 @@ export default function RootLayout() {
     }
   }, [loaded, error]);
 
-  if (!loaded && !error) {
-    return null;
-  }
+  if (!loaded && !error) return null;
 
-  return (
-    <Stack
-      screenOptions={{
-        headerStyle: { backgroundColor: "#fff" },
-        headerTintColor: "#333",
-      }}
-    >
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-    </Stack>
-  );
+  return <RootNavigator />;
 }

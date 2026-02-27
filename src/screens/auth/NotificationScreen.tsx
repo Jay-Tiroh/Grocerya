@@ -1,13 +1,15 @@
-import Button from "@/components/general/Button";
-import Spacer from "@/components/general/Spacer";
-import ThemedText from "@/components/general/ThemedText";
+import NotificationIllustration from "@assets/images/notification.svg";
+import Button from "@components/general/Button";
+import SafeAvoidingView from "@components/general/SafeAvoidingView";
+import Spacer from "@components/general/Spacer";
+import ThemedText from "@components/general/ThemedText";
+import { useAppNavigation } from "@navigation/useAppNavigation";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Notification from "../../assets/images/notification.svg";
-const notification = () => {
+const Notification = () => {
+  const navigation = useAppNavigation();
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAvoidingView safeAreaStyle={{ alignItems: "center" }}>
       <View style={[{ flex: 1 }, styles.container]}>
         <View>
           <ThemedText type="title" weight="semiBold" color="primary">
@@ -19,26 +21,26 @@ const notification = () => {
           </ThemedText>
         </View>
         <Spacer size={70} />
-        <Notification />
+        <NotificationIllustration />
       </View>
       <View style={styles.buttonContainer}>
         <Button
           text="Enable Notifications"
-          action="/"
+          action={() => navigation.navigate("Main")}
           customStyles={{ flex: 0, width: "100%" }}
         />
         <Button
           text="Skip For Now"
           type="secondary"
-          action="/"
+          action={() => navigation.navigate("Main")}
           customStyles={{ flex: 0, width: "100%" }}
         />
       </View>
-    </SafeAreaView>
+    </SafeAvoidingView>
   );
 };
 
-export default notification;
+export default Notification;
 
 const styles = StyleSheet.create({
   container: {

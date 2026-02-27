@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   Pressable,
@@ -23,13 +23,12 @@ const Button = ({
   customTextStyles,
   action,
 }: ButtonProps) => {
-  const router = useRouter();
-
+  const navigation = useNavigation<any>();
   const handlePress = () => {
     if (typeof action === "function") {
       action();
     } else if (typeof action === "string") {
-      router.push(action as any);
+      navigation.navigate(action);
     }
   };
 
