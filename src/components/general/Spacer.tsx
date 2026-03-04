@@ -10,8 +10,8 @@ const Spacer = ({ size = 10, horizontal = false }: SpacerProps) => {
   return (
     <View
       style={{
-        width: horizontal ? size : "auto",
-        height: horizontal ? "auto" : size,
+        width: horizontal ? size : undefined,
+        height: horizontal ? undefined : size,
       }}
     />
   );

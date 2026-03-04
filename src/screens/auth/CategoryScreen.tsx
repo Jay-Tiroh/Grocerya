@@ -28,7 +28,7 @@ const Category = () => {
   const remainingCount = extraCategories.length - visibleExtraCount;
 
   return (
-    <SafeAvoidingView>
+    <SafeAvoidingView safeAreaStyle={{ flex: 1, paddingHorizontal: 20 }}>
       {/* Main Content Area */}
       <View style={{ flex: 1 }}>
         <Spacer size={40} />
@@ -126,6 +126,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     height: 54,
-    marginBottom: 10,
+    marginBottom: 30,
   },
 });

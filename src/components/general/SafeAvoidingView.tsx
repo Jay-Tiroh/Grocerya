@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
-    Keyboard,
-    KeyboardAvoidingView,
-    KeyboardAvoidingViewProps,
-    Platform,
-    StyleProp,
-    StyleSheet,
-    ViewStyle,
+  Keyboard,
+  KeyboardAvoidingView,
+  KeyboardAvoidingViewProps,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
 } from "react-native";
 import {
-    SafeAreaView,
-    SafeAreaViewProps,
+  SafeAreaView,
+  SafeAreaViewProps,
 } from "react-native-safe-area-context";
 
 interface ThemedAvoidingViewProps extends KeyboardAvoidingViewProps {
@@ -50,27 +50,16 @@ const SafeAvoidingView = ({
     };
   }, []);
 
-  if (!isAvoiding) {
-    return (
-      <SafeAreaView
-        {...props}
-        style={[styles.container, styles.padded, safeAreaStyle]}
-      >
-        {children}
-      </SafeAreaView>
-    );
-  }
-
   return (
     <SafeAreaView {...props} style={[styles.container, safeAreaStyle]}>
       <KeyboardAvoidingView
         behavior="padding"
         keyboardVerticalOffset={Platform.OS === "ios" ? 0 : offset}
-        enabled={!keyboardHidden}
+        enabled={isAvoiding && !keyboardHidden}
         style={[
           styles.container,
-          styles.padded,
-          keyboardHidden ? styles.flexGrow : styles.flex,
+          isAvoiding && styles.padded,
+          styles.flex,
           avoidingViewStyle,
         ]}
       >

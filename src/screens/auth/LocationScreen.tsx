@@ -11,10 +11,12 @@ const Location = () => {
   const { toNotification } = useAuthNavigation();
 
   return (
-    <SafeAvoidingView safeAreaStyle={{ alignItems: "center" }}>
-      <View style={[{ flex: 1, justifyContent: "center" }, styles.container]}>
+    <SafeAvoidingView safeAreaStyle={styles.safeArea}>
+      <View style={styles.content}>
         <Map />
+
         <Spacer size={40} />
+
         <View>
           <ThemedText
             type="title"
@@ -24,22 +26,25 @@ const Location = () => {
           >
             Set your location
           </ThemedText>
-          <ThemedText customStyles={{ marginTop: 8, textAlign: "center" }}>
+
+          <ThemedText customStyles={styles.subtitle}>
             This let us know your location for best shipping experience
           </ThemedText>
         </View>
       </View>
+
       <View style={styles.buttonContainer}>
         <Button
           text="Continue"
           action={toNotification}
-          customStyles={{ flex: 0, width: "100%" }}
+          customStyles={{ width: "100%" }}
         />
+
         <Button
           text="Set Manually"
           type="secondary"
           action={toNotification}
-          customStyles={{ flex: 0, width: "100%" }}
+          customStyles={{ width: "100%" }}
         />
       </View>
     </SafeAvoidingView>
@@ -49,14 +54,27 @@ const Location = () => {
 export default Location;
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
-    padding: 20,
+    width: "100%",
   },
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+
+  subtitle: {
+    marginTop: 8,
+    textAlign: "center",
+  },
+
   buttonContainer: {
     gap: 10,
-    width: "100%",
+    paddingHorizontal: 20,
+    height: 120,
   },
 });

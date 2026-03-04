@@ -4,7 +4,7 @@ import { RootStackParamList } from "./types";
 
 import Onboarding from "@screens/OnboardingScreen";
 import AuthStack from "./AuthStack";
-import TabNavigator from "./TabNavigator";
+import DrawerNavigator from "./DrawerNavigator";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -14,7 +14,7 @@ export default function RootNavigator() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="Auth" component={AuthStack} />
-        <Stack.Screen name="Main" component={TabNavigator} />
+        <Stack.Screen name="MainScreens" component={DrawerNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

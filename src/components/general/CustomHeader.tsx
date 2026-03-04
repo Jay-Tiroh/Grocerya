@@ -1,6 +1,11 @@
-import { Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-// svg images
 import BackSvg from "@assets/images/back.svg";
 import HelpSvg from "@assets/images/help.svg";
 import { useAppNavigation } from "@navigation/useAppNavigation";
@@ -10,48 +15,89 @@ type CustomHeaderProps = {
   title?: string;
   goBack?: boolean;
   infoBtn?: boolean;
+  rightBtn?: React.ComponentType<any>;
+  rightBtnAction?: () => void;
 };
 
-const CustomHeader = ({ title, infoBtn, goBack }: CustomHeaderProps) => {
+const CustomHeader = ({
+  title,
+  infoBtn,
+  goBack,
+  rightBtn: RightBtn,
+  rightBtnAction,
+}: CustomHeaderProps) => {
   const navigator = useAppNavigation();
+
   return (
     <SafeAvoidingView safeAreaStyle={styles.container}>
-      {/* back btn */}
-      {goBack && (
-        <TouchableOpacity
-          onPress={() => navigator.goBack()}
-          hitSlop={{ top: 20, bottom: 30, left: 20, right: 20 }}
-        >
-          <BackSvg style={styles.svg} />
-        </TouchableOpacity>
-      )}
+      {/* LEFT */}
+      <View style={styles.side}>
+        {goBack && (
+          <TouchableOpacity
+            style={styles.svgWrapper}
+            onPress={() => navigator.goBack()}
+            hitSlop={20}
+          >
+            <BackSvg style={styles.svg} />
+          </TouchableOpacity>
+        )}
+      </View>
 
-      {/* title */}
-      <Text style={{ fontFamily: "Poppins-Bold", fontSize: 18 }}>{title}</Text>
+      {/* CENTER */}
+      <View style={styles.center}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
 
-      {/* info btn */}
-      {infoBtn && (
-        <Pressable
-          style={styles.svgWrapper}
-          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-        >
-          <HelpSvg style={styles.svg} />
-        </Pressable>
-      )}
+      {/* RIGHT */}
+      <View style={[styles.side, styles.right]}>
+        {RightBtn && (
+          <TouchableOpacity onPress={rightBtnAction} hitSlop={20}>
+            <RightBtn />
+          </TouchableOpacity>
+        )}
+
+        {infoBtn && (
+          <Pressable style={styles.svgWrapper} hitSlop={20}>
+            <HelpSvg style={styles.svg} />
+          </Pressable>
+        )}
+      </View>
     </SafeAvoidingView>
   );
 };
 
 export default CustomHeader;
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     flexDirection: "row",
     alignItems: "center",
-    padding: 20,
     justifyContent: "space-between",
+    padding: 20,
+    height: 70,
+    width: "100%",
+  },
+
+  side: {
+    // width: 60, // reserves space ALWAYS
+    // justifyContent: "center",
+  },
+
+  right: {
+    alignItems: "flex-end",
+    alignSelf: "flex-end",
+    flexDirection: "row",
+    gap: 12,
+  },
+
+  center: {
+    flex: 1,
+    alignItems: "center",
+  },
+
+  title: {
+    fontFamily: "Poppins-Bold",
+    fontSize: 18,
   },
 
   svg: {
@@ -66,7 +112,7 @@ const styles = StyleSheet.create({
     height: 32,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: "100%",
+    borderRadius: 16,
     backgroundColor: "#F8F8F8",
   },
 });

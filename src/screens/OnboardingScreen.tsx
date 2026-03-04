@@ -84,7 +84,7 @@ const Onboarding = () => {
   };
 
   return (
-    <SafeAvoidingView safeAreaStyle={styles.container}>
+    <SafeAvoidingView safeAreaStyle={[styles.container, { padding: 0 }]}>
       {/* Indicators */}
       <View style={styles.indicatorWrapper}>
         {OnboardingItems.map((_, index) => (
@@ -125,11 +125,21 @@ const Onboarding = () => {
           <Button
             text="Get Started"
             action={() => navigation.replace("Auth")}
+            customStyles={{ flex: 1 }}
           />
         ) : (
           <>
-            <Button text="Skip" type="secondary" action={handleSkip} />
-            <Button text="Next" action={handleNext} />
+            <Button
+              text="Skip"
+              type="secondary"
+              action={handleSkip}
+              customStyles={{ flex: 1 }}
+            />
+            <Button
+              text="Next"
+              action={handleNext}
+              customStyles={{ flex: 1 }}
+            />
           </>
         )}
       </View>

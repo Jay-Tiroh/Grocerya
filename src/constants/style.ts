@@ -18,5 +18,6 @@ export const utilityStyles: Record<string, ViewStyle> = {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
+    padding: 20,
   },
 };
