@@ -9,8 +9,8 @@ import { StyleSheet, View } from "react-native";
 const Notification = () => {
   const navigation = useAppNavigation();
   return (
-    <SafeAvoidingView safeAreaStyle={{ alignItems: "center" }}>
-      <View style={[{ flex: 1 }, styles.container]}>
+    <SafeAvoidingView safeAreaStyle={{ alignItems: "center", paddingTop: 20 }}>
+      <View style={[styles.container]}>
         <View>
           <ThemedText type="title" weight="semiBold" color="primary">
             Lastly, please enable notification
@@ -26,14 +26,14 @@ const Notification = () => {
       <View style={styles.buttonContainer}>
         <Button
           text="Enable Notifications"
-          action={() => navigation.navigate("Main")}
-          customStyles={{ flex: 0, width: "100%" }}
+          action={() => navigation.navigate("MainScreens")}
+          customStyles={{ width: "100%" }}
         />
         <Button
           text="Skip For Now"
           type="secondary"
-          action={() => navigation.navigate("Main")}
-          customStyles={{ flex: 0, width: "100%" }}
+          action={() => navigation.navigate("MainScreens")}
+          customStyles={{ width: "100%" }}
         />
       </View>
     </SafeAvoidingView>
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     gap: 10,
-    width: "100%",
+    paddingHorizontal: 20,
+    height: 120,
   },
 });

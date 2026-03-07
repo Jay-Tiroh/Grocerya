@@ -19,6 +19,9 @@ export type MainTabParamList = {
   Profile: undefined;
 };
 
+export type DrawerParamList = {
+  Main: undefined; // ← bottom tabs live here
+};
 /*
 |--------------------------------------------------------------------------
 | Root Stack
@@ -28,5 +31,5 @@ export type MainTabParamList = {
 export type RootStackParamList = {
   Onboarding: undefined;
   Auth: undefined;
-  Main: undefined; // ← bottom tabs live here
+  MainScreens: undefined; // ← bottom tabs live here
 };
