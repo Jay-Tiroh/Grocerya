@@ -14,10 +14,10 @@ export type AuthStackParamList = {
 };
 
 export type MainTabParamList = {
-  Home: { fullname: string; email: string };
-  Cart: { fullname: string; email: string };
-  Favorite: { fullname: string; email: string };
-  Profile: { fullname: string; email: string };
+  Home: undefined;
+  Cart: undefined;
+  Favorite: undefined;
+  Profile: { fullname?: string; email?: string };
 };
 
 export type DrawerParamList = {

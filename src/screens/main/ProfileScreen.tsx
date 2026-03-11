@@ -11,9 +11,8 @@ type Props = {
   route: ProfileScreenRouteProp;
 };
 const ProfileScreen = ({ route }: Props) => {
-  const { fullname: rawFullname, email: rawEmail } = route.params || {};
-  const fullname = rawFullname.replace(/%20/g, " ");
-  const email = rawEmail.replace(/%40/g, "@");
+  const { fullname, email } = route.params || {};
+
   return (
     <SafeAvoidingView
       safeAreaStyle={[
