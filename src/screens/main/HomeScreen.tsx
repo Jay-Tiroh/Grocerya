@@ -1,19 +1,33 @@
+import DisplayedDetails from "@components/DisplayedDetails";
 import SafeAvoidingView from "@components/general/SafeAvoidingView";
+import ThemedText from "@components/general/ThemedText";
 import { utilityStyles } from "@constants/style";
+import { MainTabParamList } from "@navigation/types";
+import { RouteProp } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
+type HomeScreenRouteProp = RouteProp<MainTabParamList, "Home">;
+type Props = {
+  route: HomeScreenRouteProp;
+};
+const HomeScreen = ({ route }: Props) => {
+  const { fullname: rawFullname, email: rawEmail } = route.params || {};
+  const fullname = rawFullname.replace(/%20/g, " ");
+  const email = rawEmail.replace(/%40/g, "@");
 
-const HomeScreen = () => {
   return (
     <SafeAvoidingView
       safeAreaStyle={[
         utilityStyles.container,
         {
-          justifyContent: "center",
+          marginTop: 40,
         },
       ]}
     >
-      <Text>HomeScreen</Text>
+      <ThemedText color="primary" type="title" weight="bold">
+        HomeScreen
+      </ThemedText>
+      <DisplayedDetails fullname={fullname} email={email} />
     </SafeAvoidingView>
   );
 };
