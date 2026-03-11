@@ -29,7 +29,14 @@ export const linking: LinkingOptions<RootStackParamList> = {
           Main: {
             screens: {
               Home: "home",
-              Profile: "profile",
+              Profile: {
+                path: "profile",
+                parse: {
+                  fullname: (fullname?: string) =>
+                    decodeURIComponent(fullname || ""),
+                  email: (email?: string) => decodeURIComponent(email || ""),
+                },
+              },
               Cart: "cart",
               Favorite: "favorite",
             },

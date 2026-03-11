@@ -9,10 +9,8 @@ const DisplayedDetails = ({
   fullname?: string;
   email?: string;
 }) => {
-  const editedfullname = fullname?.replace(/%20/g, " ");
-  const editedemail = email?.replace(/%40/g, "@");
-  const displayedName = editedfullname || "John Doe";
-  const displayedEmail = editedemail || "john.doe@example.com";
+  const displayedName = fullname || "John Doe";
+  const displayedEmail = email || "john.doe@example.com";
   return (
     <View>
       <ThemedText color="secondary" weight="medium">
