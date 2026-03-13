@@ -3,6 +3,7 @@
 | Auth Stack
 |--------------------------------------------------------------------------
 */
+import { NavigatorScreenParams } from "@react-navigation/native";
 
 export type AuthStackParamList = {
   Register: undefined;
@@ -16,11 +17,11 @@ export type MainTabParamList = {
   Home: undefined;
   Cart: undefined;
   Favorite: undefined;
-  Profile: undefined;
+  Profile: { fullname?: string; email?: string };
 };
 
 export type DrawerParamList = {
-  Main: undefined; // ← bottom tabs live here
+  Main: NavigatorScreenParams<MainTabParamList>; // bottom tabs nested here
 };
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,6 @@ export type DrawerParamList = {
 
 export type RootStackParamList = {
   Onboarding: undefined;
-  Auth: undefined;
-  MainScreens: undefined; // ← bottom tabs live here
+  Auth: NavigatorScreenParams<AuthStackParamList>; // ← nested navigator
+  MainScreens: NavigatorScreenParams<DrawerParamList>; // ← nested navigator
 };

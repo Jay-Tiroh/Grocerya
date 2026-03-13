@@ -1,7 +1,8 @@
 import SafeAvoidingView from "@components/general/SafeAvoidingView";
+import ThemedText from "@components/general/ThemedText";
 import { utilityStyles } from "@constants/style";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 
 const FavoriteScreen = () => {
   return (
@@ -9,11 +10,13 @@ const FavoriteScreen = () => {
       safeAreaStyle={[
         utilityStyles.container,
         {
-          justifyContent: "center",
+          marginTop: 40,
         },
       ]}
     >
-      <Text>FavoritesScreen</Text>
+      <ThemedText color="primary" type="title" weight="bold">
+        FavoriteScreen
+      </ThemedText>
     </SafeAvoidingView>
   );
 };

@@ -1,19 +1,31 @@
+import DisplayedDetails from "@components/DisplayedDetails";
 import SafeAvoidingView from "@components/general/SafeAvoidingView";
+import ThemedText from "@components/general/ThemedText";
 import { utilityStyles } from "@constants/style";
+import { MainTabParamList } from "@navigation/types";
+import { RouteProp } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
+type ProfileScreenRouteProp = RouteProp<MainTabParamList, "Profile">;
+type Props = {
+  route: ProfileScreenRouteProp;
+};
+const ProfileScreen = ({ route }: Props) => {
+  const { fullname, email } = route.params || {};
 
-const ProfileScreen = () => {
   return (
     <SafeAvoidingView
       safeAreaStyle={[
         utilityStyles.container,
         {
-          justifyContent: "center",
+          marginTop: 40,
         },
       ]}
     >
-      <Text>ProfileScreen</Text>
+      <ThemedText color="primary" type="title" weight="bold">
+        ProfileScreen
+      </ThemedText>
+      <DisplayedDetails fullname={fullname} email={email} />
     </SafeAvoidingView>
   );
 };
